@@ -3,9 +3,16 @@
   "plugins": ["stylelint-order", "stylelint-scss"],
   "rules": {
     "max-nesting-depth": [
-      4,
+      5,
       {
         "ignore": ["blockless-at-rules", "pseudo-classes"]
+      }
+    ],
+    "linebreaks": "unix",
+    "selector-class-pattern": [
+      "^_?(vbt|vbt-|layout|layout-|textLayer|canvasWrapper|page)",
+      {
+        "resolveNestedSelectors": true
       }
     ]
   }

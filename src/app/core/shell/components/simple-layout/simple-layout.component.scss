@@ -1,0 +1,54 @@
+.vbt-simple-layout {
+  display: flex;
+  width: 100%;
+
+  .layout {
+    background-color: #fff;
+    display: flex;
+    width: 40%;
+  }
+
+  .layout-bg {
+    background-image: url('/assets/images/background.jpg');
+    background-size: cover;
+    width: 60%;
+  }
+
+  .layout-content {
+    margin: auto 0;
+    width: 100%;
+  }
+
+  .layout-footer {
+    bottom: 0;
+    font-size: smaller;
+    position: absolute;
+    text-align: center;
+    width: 40%;
+  }
+
+  .layout-header {
+    position: absolute;
+    top: 0;
+    width: 40%;
+
+    .layout-header-img {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+      display: flex;
+      width: 100%;
+    }
+  }
+
+  .layout-header-img > img {
+    height: 152px;
+    margin: auto;
+  }
+
+  .layout-redirect-buttons {
+    padding: 24px;
+
+    a:not(:last-child) {
+      margin-right: 16px;
+    }
+  }
+}
