@@ -54,11 +54,14 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
+    "lint-staged": ">=10",
     "postcss": "^8.2.8",
     "postcss-loader": "^5.2.0",
     "postcss-ng-tailwind-in-components": "0.0.4",
     "prettier": "2.2.1",
     "protractor": "~7.0.0",
+    "simple-git-hooks": ">=2.0.3",
+    "stylefmt": "^6.0.3",
     "stylelint": "^13.12.0",
     "stylelint-config-sass-guidelines": "^8.0.0",
     "stylelint-config-standard": "^21.0.0",
@@ -67,5 +70,27 @@
     "tailwindcss": "2.0.4",
     "ts-node": "~8.3.0",
     "typescript": "~4.1.5"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "lint-staged": {
+    "linters": {
+      "*.js": [
+        "prettier --write",
+        "eslint --fix",
+        "git add"
+      ],
+      "*.ts": [
+        "prettier --write",
+        "eslint --fix",
+        "git add"
+      ],
+      "*.scss": [
+        "stylefmt",
+        "stylelint --syntax scss --fix",
+        "git add"
+      ]
+    }
   }
 }
