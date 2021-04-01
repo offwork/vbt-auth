@@ -15,7 +15,17 @@ export class SimpleLayoutComponent implements OnInit
   ngOnInit() {
 
 
-    
+
+  }
+
+
+  clickListener() {
+
+
+
   }
 
 }
+
+
+

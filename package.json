@@ -76,17 +76,17 @@
   },
   "lint-staged": {
     "linters": {
-      "*.js": [
+      "**/*.js": [
         "prettier --write",
         "eslint --fix",
         "git add"
       ],
-      "*.ts": [
+      "**/*.ts": [
         "prettier --write",
         "eslint --fix",
         "git add"
       ],
-      "*.scss": [
+      "**/*.scss": [
         "stylefmt",
         "stylelint --syntax scss --fix",
         "git add"
