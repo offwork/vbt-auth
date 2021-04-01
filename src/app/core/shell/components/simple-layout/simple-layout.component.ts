@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'vbt-simple-layout',
@@ -8,10 +8,14 @@ import { Component, ViewEncapsulation } from '@angular/core';
   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { class: 'vbt-simple-layout' }
 })
-export class SimpleLayoutComponent 
-{
+export class SimpleLayoutComponent implements OnInit
+  {
 
 
+  ngOnInit() {
 
+
+    
+  }
 
 }
