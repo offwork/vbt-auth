@@ -8,4 +8,10 @@ import { Component, ViewEncapsulation } from '@angular/core';
   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { class: 'vbt-simple-layout' }
 })
-export class SimpleLayoutComponent {}
+export class SimpleLayoutComponent 
+{
+
+
+
+
+}
