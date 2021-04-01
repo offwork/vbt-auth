@@ -87,8 +87,8 @@
         "git add"
       ],
       "*.scss": [
-        "stylefmt",
         "stylelint --syntax scss --fix",
+        "prettier --parser postcss --write",
         "git add"
       ]
   }
