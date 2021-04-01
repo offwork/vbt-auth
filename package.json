@@ -47,6 +47,7 @@
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsdoc": "30.7.6",
     "eslint-plugin-prefer-arrow": "1.2.2",
+    "husky": "^6.0.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~6.1.0",
@@ -75,22 +76,20 @@
     "pre-commit": "npx lint-staged"
   },
   "lint-staged": {
-    "linters": {
-      "**/*.js": [
+      "*.js": [
         "prettier --write",
         "eslint --fix",
         "git add"
       ],
-      "**/*.ts": [
+      "*.ts": [
         "prettier --write",
         "eslint --fix",
         "git add"
       ],
-      "**/*.scss": [
+      "*.scss": [
         "stylefmt",
         "stylelint --syntax scss --fix",
         "git add"
       ]
-    }
   }
 }

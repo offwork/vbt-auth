@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'vbt-simple-layout',
@@ -6,26 +6,6 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   styleUrls: ['./simple-layout.component.scss'],
   encapsulation: ViewEncapsulation.None,
   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
-  host: { class: 'vbt-simple-layout' }
+  host: { class: 'vbt-simple-layout' },
 })
-export class SimpleLayoutComponent implements OnInit
-  {
-
-
-  ngOnInit() {
-
-
-
-  }
-
-
-  clickListener() {
-
-
-
-  }
-
-}
-
-
-
+export class SimpleLayoutComponent {}
