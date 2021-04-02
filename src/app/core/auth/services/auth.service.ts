@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LoginFormSchema } from '../models/login-form-schema';
+import { Observable } from 'rxjs';
+import { Company, LoginFormSchema, Response } from '../models/login-form-schema';
 
 const END_POINT = 'http://10.211.55.3:1925/api/Company';
 
@@ -8,16 +9,14 @@ const END_POINT = 'http://10.211.55.3:1925/api/Company';
 export class AuthService {
   constructor(private _httpClient: HttpClient) {}
 
-  login(loginSchema: LoginFormSchema) {
+  login(loginSchema: LoginFormSchema): Observable<Response<Company>> {
     const credentials: LoginFormSchema = {
       companyCode: loginSchema.companyCode,
       userName: loginSchema.userName,
       password: this.__encrypt(loginSchema.password),
     };
 
-    console.log(credentials);
-
-    return this._httpClient.post(END_POINT, credentials);
+    return this._httpClient.post<Response<Company>>(END_POINT, credentials);
   }
 
   __encrypt(password: string): string {

@@ -76,20 +76,20 @@
     "pre-commit": "npx lint-staged"
   },
   "lint-staged": {
-      "*.js": [
-        "prettier --write",
-        "eslint --fix",
-        "git add"
-      ],
-      "*.ts": [
-        "prettier --write",
-        "eslint --fix",
-        "git add"
-      ],
-      "*.scss": [
-        "stylelint --syntax scss --fix",
-        "prettier --parser postcss --write",
-        "git add"
-      ]
+    "*.js": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ],
+    "*.ts": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ],
+    "*.scss": [
+      "stylelint --syntax scss --fix",
+      "prettier --parser postcss --write",
+      "git add"
+    ]
   }
 }
