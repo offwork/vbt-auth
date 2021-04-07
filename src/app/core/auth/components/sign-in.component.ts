@@ -13,6 +13,8 @@ import { AuthService } from '../services/auth.service';
   host: { class: 'vbt-sign-in' },
 })
 export class SignInComponent implements OnDestroy {
+  signInVar: string;
+
   signInForm: FormGroup;
   _endSubscription = new Subject<boolean>();
 
