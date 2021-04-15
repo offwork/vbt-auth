@@ -1,9 +1,10 @@
-import { Component, OnDestroy, SecurityContext } from '@angular/core';
+import { Component, Inject, OnDestroy, SecurityContext } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { Subject } from 'rxjs';
+import { combineLatest, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { AuthService } from '../services/auth.service';
+import { WINDOW } from '../../tokens/window.token';
+import { AuthService, Status } from '../services/auth.service';
 
 @Component({
   selector: 'vbt-sign-in',
@@ -13,12 +14,15 @@ import { AuthService } from '../services/auth.service';
   host: { class: 'vbt-sign-in' },
 })
 export class SignInComponent implements OnDestroy {
-  signInVar: string;
-
   signInForm: FormGroup;
-  _endSubscription = new Subject<boolean>();
+  _endSubscription$ = new Subject<boolean>();
 
-  constructor(private fb: FormBuilder, private _auth: AuthService, private _domSanitizer: DomSanitizer) {
+  constructor(
+    @Inject(WINDOW) public _window: Window,
+    private fb: FormBuilder,
+    private _auth: AuthService,
+    private _domSanitizer: DomSanitizer
+  ) {
     this.signInForm = this.fb.group({
       userName: ['bkasmer'],
       password: ['vbt123456'],
@@ -27,20 +31,22 @@ export class SignInComponent implements OnDestroy {
   }
 
   signIn() {
-    this._auth
-      .login(this.signInForm.value)
-      .pipe(takeUntil(this._endSubscription))
-      .subscribe((response) => {
-        const url = this.__sanitizeURL(
-          `http://${response.entity.url}/auth/login?key=${encodeURIComponent(response.entity.key)}`
-        );
-        window.open(url as string, '_blank');
+    combineLatest([this._auth.login(this.signInForm.value).data, this._auth.loginStatus])
+      .pipe(takeUntil(this._endSubscription$))
+      .subscribe(([data, status]) => {
+        if (status === Status.SUCCESS) {
+          const url = this.__sanitizeURL(
+            `http://${data.entity.url}/auth/login?key=${encodeURIComponent(data.entity.key)}`
+          );
+
+          this._window.open(url as string, '_self');
+        }
       });
   }
 
   ngOnDestroy() {
-    this._endSubscription.next(true);
-    this._endSubscription.complete();
+    this._endSubscription$.next(true);
+    this._endSubscription$.complete();
   }
 
   __sanitizeURL(url: string): SafeUrl {

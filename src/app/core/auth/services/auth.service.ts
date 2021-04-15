@@ -1,22 +1,52 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { defer, Observable, ReplaySubject } from 'rxjs';
+import { catchError, delay, retry, tap } from 'rxjs/operators';
 import { Company, LoginFormSchema, Response } from '../models/login-form-schema';
 
 const END_POINT = 'http://10.211.55.3:1925/api/Company';
 
+export interface Pending<T> {
+  data: Observable<T>;
+  status: Observable<Status>;
+}
+
+export enum Status {
+  LOADING = 'LOADING',
+  SUCCESS = 'SUCCESS',
+  ERROR = 'ERROR',
+}
+
 @Injectable()
 export class AuthService {
+  readonly loginStatus = new ReplaySubject<Status>();
+
   constructor(private _httpClient: HttpClient) {}
 
-  login(loginSchema: LoginFormSchema): Observable<Response<Company>> {
+  login(loginSchema: LoginFormSchema): Pending<Response<Company>> {
+    const status = this.loginStatus;
     const credentials: LoginFormSchema = {
       companyCode: loginSchema.companyCode,
       userName: loginSchema.userName,
       password: this.__encrypt(loginSchema.password),
     };
 
-    return this._httpClient.post<Response<Company>>(END_POINT, credentials);
+    const request = this._httpClient.post<Response<Company>>(END_POINT, credentials).pipe(
+      delay(100),
+      retry(1),
+      catchError((errot) => {
+        this.loginStatus.next(Status.ERROR);
+        throw 'Error loadin Company';
+      }),
+      tap(() => this.loginStatus.next(Status.SUCCESS))
+    );
+
+    const data = defer(() => {
+      this.loginStatus.next(Status.LOADING);
+      return request;
+    });
+
+    return { data, status };
   }
 
   __encrypt(password: string): string {
