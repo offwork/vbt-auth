@@ -1,9 +1,25 @@
-# VbtAuth
+# Vbt-Auth
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.6.
+>VBT-Auth is the service provider used to log in to different clients with a single session. After completing the SSO-like processes consisting of a few steps, it performs the login of the clients.
+
+<br>
+
+## Installation
+---
+Before running the project, you need to run the following commands to work with ESlint:
+```sh
+# if you're using Windows, write `@angular-devkit/core @angular-devkit/schematics` rather then `@angular-devkit/{core,schematics}`
+npm i -g @angular/cli @angular-devkit/{core,schematics} @angular-eslint/schematics
+
+# then open your project folder like `cd path/<your-project-folder-name>`
+npm install OR yarn
+```
+for more information, look at this [link](https://github.com/angular-eslint/angular-eslint#quick-start-with-angular-and-eslint)
+
+<br>
 
 ## Development server
-
+---
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
