@@ -80,18 +80,15 @@
   "lint-staged": {
     "*.js": [
       "prettier --write",
-      "eslint --fix",
-      "git add"
+      "eslint --fix"
     ],
     "*.ts": [
       "prettier --write",
-      "eslint --fix",
-      "git add"
+      "eslint --fix"
     ],
     "*.scss": [
       "stylelint --syntax scss --fix",
-      "prettier --parser postcss --write",
-      "git add"
+      "prettier --parser postcss --write"
     ]
   }
 }
